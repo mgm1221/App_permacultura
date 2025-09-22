@@ -27,17 +27,9 @@ class _PantallaCredencialesState extends State<PantallaCredenciales> {
   @override
   void initState() {
     super.initState();
-    getServices();
   }
-  Future<void> getServices() async{
-    widget.ble.connectToDevice(id: widget.deviceId);
 
-    final discoveredServices = await widget.ble.getDiscoveredServices(widget.deviceId);
-    setState(() {
-      services = discoveredServices;
-      loading = false;
-    });
-  }
+
 
   Future<void> _execute() async {
     if (!_formKey.currentState!.validate()) return;

@@ -1,5 +1,6 @@
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'dart:convert';
+import 'package:app/Services/settings_services.dart';
 
 Future<bool> sentCredentials(FlutterReactiveBle ble, String deviceId, String ssid, String password) async{
   Uuid serviceId = Uuid.parse("bc6fffe8-c75d-4d8d-9443-1f53d5486860");
@@ -9,6 +10,9 @@ Future<bool> sentCredentials(FlutterReactiveBle ble, String deviceId, String ssi
   try{
     await ble.writeCharacteristicWithResponse(qualChar, value: utf8.encode(finalString));
     print("Write with response successful");
+    SettingsService.markParingComplete();
+    SettingsService.savePairedDeviceId(deviceId);
+    print(SettingsService.pairedDeviceId);
     return true;
 
   }catch(e){
