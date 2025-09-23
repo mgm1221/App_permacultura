@@ -17,6 +17,9 @@ class SettingsService {
     await _prefs!.setBool(_kIsFirstRun, false);
   }
 
+  static Future<void> markParingNotComplete() async {
+    await _prefs!.setBool(_kIsFirstRun, true);
+  }
   static String? get pairedDeviceId => _prefs!.getString(_kPairedDeviceId);
 
   static Future<void> savePairedDeviceId(String deviceId) async {

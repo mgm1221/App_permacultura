@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'Screens/scanningBLE.dart';
 import 'package:app/Services/settings_services.dart';
+import 'Screens/firstScreen.dart';
+import 'Screens/homeScreen.dart';
 
 void main() async{
-
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
   await SettingsService.init();
+  runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -15,61 +17,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final firstRun = SettingsService.isFirstRun;
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Iniciar sesion'),
+      home: firstRun ? const FirstScreen() : const HomeScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.greenAccent,
-        title: Text(widget.title),
-      ),
-      body: Center(
-
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Bienvenido a la aplicacion de Permacultura',
-            ),
-            ElevatedButton(
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (context)=> ScanScreen(),
-                    ),
-                  );
-                },
-                child: Text("Conectar con tu dispositivo")
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}

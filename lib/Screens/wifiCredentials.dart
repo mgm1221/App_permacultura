@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:app/Services/bleSendCredentials.dart';
+import 'package:app/Screens/homeScreen.dart';
 class PantallaCredenciales extends StatefulWidget {
   final FlutterReactiveBle ble;
   final String deviceId;
@@ -15,7 +16,6 @@ class _PantallaCredencialesState extends State<PantallaCredenciales> {
   final _formKey = GlobalKey<FormState>();
   final ssidController = TextEditingController();
   final passController = TextEditingController();
-  List<Service>? services;
   bool loading = false;
 
   @override
@@ -44,6 +44,12 @@ class _PantallaCredencialesState extends State<PantallaCredenciales> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Credenciales enviadas ✅')),
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (context) => HomeScreen(),
+        ),
       );
     } catch (e) {
       if (!mounted) return;

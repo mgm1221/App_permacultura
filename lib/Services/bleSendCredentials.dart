@@ -9,10 +9,8 @@ Future<bool> sentCredentials(FlutterReactiveBle ble, String deviceId, String ssi
   String finalString = ssid + " " + password;
   try{
     await ble.writeCharacteristicWithResponse(qualChar, value: utf8.encode(finalString));
-    print("Write with response successful");
     SettingsService.markParingComplete();
     SettingsService.savePairedDeviceId(deviceId);
-    print(SettingsService.pairedDeviceId);
     return true;
 
   }catch(e){

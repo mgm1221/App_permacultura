@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:app/Services/ble_Search.dart';
 import 'package:app/Services/bleConnect.dart';
-import 'Pantalla_credenciales_wifi.dart';
+import 'wifiCredentials.dart';
 
 
 final flutterReactiveBle = FlutterReactiveBle();
