@@ -13,8 +13,6 @@ void main() async{
     var id = uuid.v4();
     SettingsService.saveClientId(id);
   }
-
-  final mqttClient = MqttClient.withPort('mqtt.permaculturatech.com', SettingsService.clientId ?? '1', 1884);
 }
 
 class MyApp extends StatelessWidget {
