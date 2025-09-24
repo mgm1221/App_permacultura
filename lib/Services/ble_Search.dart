@@ -3,12 +3,13 @@ import 'package:permission_handler/permission_handler.dart';
 
 Future<List<DiscoveredDevice>> bleScan(FlutterReactiveBle ble) async{
   final names = <DiscoveredDevice>{};
+  Uuid serviceId = Uuid.parse("bc6fffe8-c75d-4d8d-9443-1f53d5486860");
 
   await Permission.bluetooth.request();
   await Future.delayed(const Duration(milliseconds: 500));
   //construimos un stream llamado search
 
-  final search = ble.scanForDevices(withServices: []).listen((device) {
+  final search = ble.scanForDevices(withServices: [serviceId]).listen((device) {
     names.add(device);
   });
 
