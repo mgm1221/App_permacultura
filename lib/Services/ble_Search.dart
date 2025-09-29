@@ -10,7 +10,15 @@ Future<List<DiscoveredDevice>> bleScan(FlutterReactiveBle ble) async{
   //construimos un stream llamado search
 
   final search = ble.scanForDevices(withServices: [serviceId]).listen((device) {
-    names.add(device);
+    bool repeat = false;
+    for(var dev in names){
+      if(dev.id == device.id){
+        repeat = true;
+      }
+    }
+    if(!repeat){
+      names.add(device);
+    }
   });
 
   await Future.delayed(const Duration(seconds: 2));
@@ -19,7 +27,6 @@ Future<List<DiscoveredDevice>> bleScan(FlutterReactiveBle ble) async{
   await search.cancel();
 
   //formateamos resultados en una lista sin repetidos
-
   final list = names.toList();
   return list;
 }

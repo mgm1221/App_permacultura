@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final firstRun = SettingsService.isFirstRun;
     return MaterialApp(
-      home: firstRun ? const FirstScreen() : const HomeScreen(),
+      home: firstRun ? const FirstScreen() : const HomeScreen(connectedBefore: false,),
     );
   }
 }

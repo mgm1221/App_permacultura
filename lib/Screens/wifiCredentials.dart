@@ -29,8 +29,6 @@ class _PantallaCredencialesState extends State<PantallaCredenciales> {
     super.initState();
   }
 
-
-
   Future<void> _execute() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -48,7 +46,7 @@ class _PantallaCredencialesState extends State<PantallaCredenciales> {
       Navigator.push(
         context,
         MaterialPageRoute<void>(
-          builder: (context) => HomeScreen(),
+          builder: (context) => HomeScreen(connectedBefore: true),
         ),
       );
     } catch (e) {
