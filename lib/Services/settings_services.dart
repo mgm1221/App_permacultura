@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsService {
   static const _kIsFirstRun = 'is_first_run';
-  static const _kPairedDeviceId = 'paired_device_id';
+  static const _kPairedDevicesIds = 'paired_device_id';
   static const _kClientId = 'client_id';
   static SharedPreferences? _prefs;
 
@@ -21,14 +21,16 @@ class SettingsService {
   static Future<void> markParingNotComplete() async {
     await _prefs!.setBool(_kIsFirstRun, true);
   }
-  static String? get pairedDeviceId => _prefs!.getString(_kPairedDeviceId);
+  static List<String>? get pairedDeviceId => _prefs!.getStringList(_kPairedDevicesIds);
 
   static Future<void> savePairedDeviceId(String deviceId) async {
-    await _prefs!.setString(_kPairedDeviceId, deviceId);
+    List<String> devices = (_prefs!.getStringList(_kPairedDevicesIds)?? []);
+    devices.add(deviceId);
+    await _prefs!.setStringList(_kPairedDevicesIds, devices);
   }
 
   static Future<void> clearPairedDevice() async {
-    await _prefs!.remove(_kPairedDeviceId);
+    await _prefs!.remove(_kPairedDevicesIds);
   }
 
   static Future<void> saveClientId(String uuid) async{

@@ -27,9 +27,50 @@ class _HomeScreenState extends State<HomeScreen>{
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+
           children: [
-            ElevatedButton(onPressed:()=> resetSettings()
+            for (var i in {1,2,3,4})
+            Container(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+
+                children: [
+                  Container(
+
+                    height: 50,
+                    width: 50,
+                    child: Padding(
+                      padding:EdgeInsets.all(16.0),
+                      child: const Text("1"),
+                    ),
+                    color: Colors.blue,
+
+                  ),
+                  Expanded(
+
+                    child: Padding(
+                      padding:EdgeInsets.all(16.0),
+                      child: const Text("Monitor"),
+                    ),
+                  ),
+                  Container(
+                    height: 50,
+                    width: 50,
+                    child: Padding(
+                      padding:EdgeInsets.all(16.0),
+                      child: const Text("2"),
+                    ),
+                    color: Colors.blue,
+                  ),
+                ],
+              ),
+
+            ),
+
+
+
+        ElevatedButton(onPressed:()=> resetSettings()
                 , child: Text("Reset"))
           ],
         ),
