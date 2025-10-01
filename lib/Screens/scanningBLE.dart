@@ -5,11 +5,9 @@ import 'package:app/Services/bleConnect.dart';
 import 'wifiCredentials.dart';
 
 
-final flutterReactiveBle = FlutterReactiveBle();
-
-
 class ScanScreen extends StatefulWidget{
-  const ScanScreen({super.key});
+  final FlutterReactiveBle ble;
+  const ScanScreen({super.key, required this.ble});
   @override
   State<ScanScreen> createState() => _ScanScreenState();
 }
@@ -22,7 +20,7 @@ class _ScanScreenState extends State<ScanScreen>{
   Future<void> _runScan() async {
     setState(() => loading = true);
     try {
-      final result = await bleScan(flutterReactiveBle);
+      final result = await bleScan(widget.ble);
       setState(() => devices = result);
 
     } finally {
@@ -33,13 +31,13 @@ class _ScanScreenState extends State<ScanScreen>{
     setState(() =>loading = true);
     bool d = false;
     try{
-      d = await bleConnect(flutterReactiveBle,device);
+      d = await bleConnect(widget.ble,device);
 
     } finally{
       if (d == true){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PantallaCredenciales(ble: flutterReactiveBle, deviceId: device.id, deviceName: device.name))
+          MaterialPageRoute(builder: (context) => PantallaCredenciales(ble: widget.ble, deviceId: device.id, deviceName: device.name))
         );
       }else{
         ScaffoldMessenger.of(context).showSnackBar(

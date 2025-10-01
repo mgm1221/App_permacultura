@@ -46,7 +46,7 @@ class _PantallaCredencialesState extends State<PantallaCredenciales> {
       Navigator.push(
         context,
         MaterialPageRoute<void>(
-          builder: (context) => HomeScreen(connectedBefore: true),
+          builder: (context) => HomeScreen(connectedBefore: true, ble: widget.ble),
         ),
       );
     } catch (e) {

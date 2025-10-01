@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'scanningBLE.dart';
 
 class FirstScreen extends StatefulWidget{
-  const FirstScreen({super.key});
+  final FlutterReactiveBle ble;
+  const FirstScreen({super.key, required this.ble});
 
   @override
   State<StatefulWidget> createState() =>_FirstScreenState();
@@ -31,7 +33,7 @@ class _FirstScreenState extends State<FirstScreen>{
                   Navigator.push(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (context)=> ScanScreen(),
+                      builder: (context)=> ScanScreen(ble: widget.ble,),
                     ),
                   );
                 },
